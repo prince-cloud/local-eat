@@ -7,7 +7,7 @@ AppBar homeAppBar(BuildContext context) {
     backgroundColor: const Color(0xFFfcc833),
     elevation: 0,
     leading: IconButton(
-      icon: SvgPicture.asset("assets/icons/menu.svg"),
+      icon: const Icon(Icons.menu),
       onPressed: () {},
       color: Colors.white,
     ),

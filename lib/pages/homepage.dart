@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:local_eat/components/search_box.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_eat/constants.dart';
+import 'package:local_eat/pages/groceris/groceris_list.dart';
+import 'package:local_eat/pages/resturants/returants_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,14 @@ class HomePage extends StatelessWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResturantsList(),
+                      ),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
@@ -41,7 +50,15 @@ class HomePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ResturantsList(),
+                                      ),
+                                    );
+                                  },
                                   icon: SvgPicture.asset(
                                     "assets/icons/pizza.svg",
                                   ),
@@ -55,7 +72,15 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ResturantsList(),
+                                      ),
+                                    );
+                                  },
                                   icon: SvgPicture.asset(
                                     "assets/icons/right_arrow.svg",
                                   ),
@@ -69,7 +94,14 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const GrocerisList(),
+                      ),
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
@@ -89,7 +121,15 @@ class HomePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const GrocerisList(),
+                                      ),
+                                    );
+                                  },
                                   icon: SvgPicture.asset(
                                     "assets/icons/vegetables.svg",
                                   ),
@@ -103,7 +143,15 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const GrocerisList(),
+                                      ),
+                                    );
+                                  },
                                   icon: SvgPicture.asset(
                                     "assets/icons/right_arrow.svg",
                                   ),
