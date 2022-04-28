@@ -5,7 +5,7 @@ import 'package:local_eat/components/search_box.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_eat/constants.dart';
 import 'package:local_eat/pages/groceris/groceris_list.dart';
-import 'package:local_eat/pages/resturants/returants_list.dart';
+import 'package:local_eat/pages/resturants/resturant_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -46,6 +46,14 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   flutter_svg: ^0.22.0
+  http: ^0.13.4
+  provider: ^6.0.1
+  url_launcher: ^6.0.17
+  sqflite: ^2.0.2
+  sqflite_migration:
+  cached_network_image: ^3.2.0
+  double_back_to_close_app: ^2.1.0
+
 
 
 # For information on the generic Dart part of this file, see the
