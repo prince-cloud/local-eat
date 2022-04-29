@@ -2,12 +2,14 @@ class Resturant {
   int id;
   String name, image;
   List<String> tags;
+  List<String> foods;
 
   Resturant({
     required this.id,
     required this.name,
     required this.image,
     required this.tags,
+    required this.foods,
   });
 
   factory Resturant.fromMap(Map data) {
@@ -17,6 +19,9 @@ class Resturant {
       image: data['image'].toString(),
       tags: (data['tags'] as List)
           .map((tag) => (tag as Map)['tag'] as String)
+          .toList(),
+      foods: (data['foods'] as List)
+          .map((food) => (food as Map)['name'] as String)
           .toList(),
     );
   }

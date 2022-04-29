@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:local_eat/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:local_eat/models/food_model.dart';
 import 'package:local_eat/models/resturant_model.dart';
+import 'package:local_eat/network_api.dart';
 import 'package:local_eat/providers/resturant_detail_provider.dart';
-import 'package:local_eat/providers/resturants_provider.dart';
 import 'package:provider/provider.dart';
 
 class ResturantDetail extends StatefulWidget {
@@ -53,7 +54,6 @@ class _ResturantDetailState extends State<ResturantDetail> {
             children: [
               Stack(
                 children: <Widget>[
-                  // The containers in the background
                   Column(
                     children: <Widget>[
                       Container(
@@ -103,6 +103,91 @@ class _ResturantDetailState extends State<ResturantDetail> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              FutureBuilder<List<Food>>(
+                future: apiClient.fetchResturantFoods(id: widget.resturant.id),
+                builder:
+                    (BuildContext context, AsyncSnapshot<List<Food>> foods) {
+                  return Column(
+                    children: [
+                      if (foods.hasError)
+                        Center(
+                          child: Text(foods.error.toString()),
+                        ),
+                      if (foods.data != null)
+                        ...foods.data!.map(
+                          (food) {
+                            return Card(
+                              elevation: 7,
+                              shadowColor: const Color.fromARGB(148, 0, 0, 0),
+                              child: Container(
+                                padding: const EdgeInsets.all(10.0),
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      onTap: () {
+                                        print(food.name + " added to list");
+                                      },
+                                      title: Text(food.name),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(food.description),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          if (food.size != null ||
+                                              food.size != "" ||
+                                              food.size!.isNotEmpty)
+                                            Text(
+                                              "Size: " + food.size!,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                        ],
+                                      ),
+                                      trailing: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('GHC ' + food.price),
+                                          const Icon(
+                                            Icons.add_circle,
+                                            color: Color.fromARGB(
+                                                190, 255, 153, 0),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20,
+                                          left: 20,
+                                          top: 3,
+                                          bottom: 3),
+                                      child: Container(
+                                        color: const Color(0xFFEBEBEB),
+                                        height: 1.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -110,3 +195,15 @@ class _ResturantDetailState extends State<ResturantDetail> {
     );
   }
 }
+/* 
+Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20,
+                                          left: 20,
+                                          top: 3,
+                                          bottom: 3),
+                                      child: Container(
+                                        color: const Color(0xFFEBEBEB),
+                                        height: 1.0,
+                                      ),
+                                    ), */

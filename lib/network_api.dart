@@ -1,8 +1,7 @@
 import 'dart:io';
-
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
+import 'package:local_eat/models/food_model.dart';
 import 'package:local_eat/models/resturant_model.dart';
 
 class NetworkFailure {
@@ -71,8 +70,6 @@ class ApiClient {
       headers: newHeaders,
       body: jsonEncode(data),
     );
-    //print(response.statusCode);
-    //print(response.toString());
     if (response.statusCode == 404) {
       throw NetworkFailure("Sorry there is no internet connection");
     } else if (response.statusCode == 405) {
@@ -94,6 +91,24 @@ class ApiClient {
             .map((e) => e as Map<String, dynamic>)
             .toList();
     return Resturant.fromJson(results).toList();
+  }
+
+  Future<List<Food>> fetchResturantFoods({
+    required int id,
+  }) async {
+    http.Response response;
+    String apiUrl = baseUrl + '/api/v1/resturants/$id/foods/';
+    try {
+      response = await get(apiUrl);
+    } on SocketException catch (_) {
+      throw NetworkFailure("No internet Connection");
+    }
+    List responseData = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+    List<Map> results =
+        responseData.map((e) => e as Map<String, dynamic>).toList();
+    List<Food> foods = Food.fromJson(results);
+
+    return foods;
   }
 }
 

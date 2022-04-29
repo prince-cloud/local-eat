@@ -6,9 +6,14 @@ import 'package:local_eat/pages/resturants/resturant_card.dart';
 import 'package:local_eat/providers/resturants_provider.dart';
 import 'package:provider/provider.dart';
 
-class ResturantsList extends StatelessWidget {
+class ResturantsList extends StatefulWidget {
   const ResturantsList({Key? key}) : super(key: key);
 
+  @override
+  State<ResturantsList> createState() => _ResturantsListState();
+}
+
+class _ResturantsListState extends State<ResturantsList> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
