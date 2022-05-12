@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-
 class Groceries {
   int id;
   String name, price, description, image;
@@ -30,7 +27,6 @@ class Groceries {
         Groceries.fromMap(i),
       );
     }
-    ;
 
     return groceries;
   }

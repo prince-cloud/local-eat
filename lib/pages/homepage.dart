@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:local_eat/components/search_box.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_eat/constants.dart';
+import 'package:local_eat/models/grocery_shop_model.dart';
 import 'package:local_eat/pages/groceris/groceris_list.dart';
+import 'package:local_eat/pages/groceris/grocery_shop_list.dart';
 import 'package:local_eat/pages/resturants/resturant_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -99,7 +101,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const GrocerisList(),
+                        builder: (context) => const GroceryShopList(),
                       ),
                     );
                   },
@@ -149,7 +151,7 @@ class HomePage extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const GrocerisList(),
+                                            const GroceryShopList(),
                                       ),
                                     );
                                   },
