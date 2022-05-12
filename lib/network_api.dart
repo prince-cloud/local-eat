@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:local_eat/models/food_menu_models.dart';
 import 'package:local_eat/models/food_model.dart';
+import 'package:local_eat/models/groceries_model.dart';
 import 'package:local_eat/models/resturant_model.dart';
 
 class NetworkFailure {
@@ -34,7 +36,7 @@ class ApiClientListResult<T> {
 class ApiClient {
   String token = "";
   bool isAuthenticated = false;
-  final String baseUrl = 'http://192.168.6.93:8000';
+  final String baseUrl = 'http://192.168.6.56:8000';
 
   Map<String, String> headers = {'Content-Type': 'application/json'};
 
@@ -109,6 +111,57 @@ class ApiClient {
     List<Food> foods = Food.fromJson(results);
 
     return foods;
+  }
+
+  Future<List<FoodMenu>> fetchResturantFoodMenu({
+    required int id,
+  }) async {
+    http.Response response;
+    String apiUrl = baseUrl + '/api/v1/resturants/$id/menu/';
+    try {
+      response = await get(apiUrl);
+    } on SocketException catch (_) {
+      throw NetworkFailure("No internet Connection");
+    }
+    List responseData = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+    List<Map> results =
+        responseData.map((e) => e as Map<String, dynamic>).toList();
+    List<FoodMenu> foods = FoodMenu.fromJson(results);
+
+    return foods;
+  }
+
+  Future<List<Food>> fetchMenuFoods({
+    required int id,
+  }) async {
+    http.Response response;
+    String apiUrl = baseUrl + '/api/v1/food_menus/$id/foods/';
+    try {
+      response = await get(apiUrl);
+    } on SocketException catch (_) {
+      throw NetworkFailure("No internet Connection");
+    }
+    List responseData = jsonDecode(utf8.decode(response.bodyBytes)) as List;
+    List<Map> results =
+        responseData.map((e) => e as Map<String, dynamic>).toList();
+    List<Food> foods = Food.fromJson(results);
+
+    return foods;
+  }
+
+  Future<List<Groceries>> fetchGroceris() async {
+    http.Response response;
+    try {
+      response = await get(baseUrl + '/api/v1/groceries/');
+    } on SocketException catch (_) {
+      throw NetworkFailure("No internet Connection");
+    }
+
+    List<Map> results =
+        (jsonDecode(utf8.decode(response.bodyBytes))['results'] as List)
+            .map((e) => e as Map<String, dynamic>)
+            .toList();
+    return Groceries.fromJson(results).toList();
   }
 }
 

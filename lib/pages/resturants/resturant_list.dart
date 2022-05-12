@@ -3,7 +3,7 @@ import 'package:local_eat/components/search_box.dart';
 import 'package:local_eat/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_eat/pages/resturants/resturant_card.dart';
-import 'package:local_eat/providers/resturants_provider.dart';
+import 'package:local_eat/providers/resturants_list_provider.dart';
 import 'package:provider/provider.dart';
 
 class ResturantsList extends StatefulWidget {

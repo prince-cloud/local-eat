@@ -68,10 +68,13 @@ Widget resturantCard(
               ],
             ),
           ),
-          Container(
+          /* Container(
             color: Colors.white,
             height: 30,
             child: Row(),
+          ), */
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),

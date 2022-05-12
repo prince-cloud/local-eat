@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:local_eat/components/search_box.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -152,54 +153,6 @@ class HomePage extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  icon: SvgPicture.asset(
-                                    "assets/icons/right_arrow.svg",
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      elevation: 7,
-                      shadowColor: const Color.fromARGB(110, 0, 0, 0),
-                      child: ClipRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                          child: Container(
-                            width: 130.0,
-                            height: 160.0,
-                            decoration: const BoxDecoration(
-                              color: whiteColor,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: SvgPicture.asset(
-                                    "assets/icons/delivery.svg",
-                                  ),
-                                ),
-                                const Text(
-                                  "Delivery",
-                                  style: TextStyle(
-                                    color: blackColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
                                   icon: SvgPicture.asset(
                                     "assets/icons/right_arrow.svg",
                                   ),
