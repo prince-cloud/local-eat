@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:local_eat/pages/main_page.dart';
+import 'package:local_eat/functions/cart_item_counter.dart';
+import 'package:local_eat/functions/total_order_amount.dart';
+import 'package:local_eat/global.dart';
+import 'package:local_eat/splashScreen/main_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedPreferences = await SharedPreferences.getInstance();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -11,10 +21,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Local Eat',
-      theme: ThemeData(primarySwatch: Colors.yellow),
-      home: const MainPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (c) => CartItemCounter()),
+        ChangeNotifierProvider(create: (c) => TotalOrderAmount()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Local Eat',
+        theme: ThemeData(primarySwatch: Colors.yellow),
+        home: const MainPage(),
+      ),
     );
   }
 }

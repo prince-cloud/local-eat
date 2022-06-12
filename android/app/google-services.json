@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "201466505479",
+    "project_id": "localeat-app-4bbc5",
+    "storage_bucket": "localeat-app-4bbc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201466505479:android:6cdcdbeb643bae6d557da2",
+        "android_client_info": {
+          "package_name": "com.localeat.localeatsellerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201466505479-pvqtggtl8mpu5v656kn3egt4ctkugb9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCprVxCmB-vgoVruy2RsaMsKe19eldtZ0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201466505479-pvqtggtl8mpu5v656kn3egt4ctkugb9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201466505479:android:10e55f48de189c93557da2",
+        "android_client_info": {
+          "package_name": "com.localeat.localeatusersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201466505479-pvqtggtl8mpu5v656kn3egt4ctkugb9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCprVxCmB-vgoVruy2RsaMsKe19eldtZ0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201466505479-pvqtggtl8mpu5v656kn3egt4ctkugb9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

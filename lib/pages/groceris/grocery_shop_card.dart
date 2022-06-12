@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_eat/models/grocery_shop_model.dart';
 import 'package:local_eat/pages/groceris/grocery_shop_detail.dart';
-import 'package:local_eat/pages/resturants/resturant_detail.dart';
 
 Widget groceryShopCard(
     {required GroceryShop groceryShop, required BuildContext context}) {

@@ -1,33 +1,56 @@
-class Food {
-  int id;
-  String  name, description, price;
-  String? size;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Food({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.size,
+class FoodItems {
+  String? itemId,
+      resturantId,
+      resturantName,
+      menuId,
+      itemTitle,
+      shortDescription,
+      thumbnail,
+      status;
+  int? price;
+  Timestamp? dateCreated;
+
+  FoodItems({
+    this.itemId,
+    this.resturantId,
+    this.resturantName,
+    this.menuId,
+    this.itemTitle,
+    this.shortDescription,
+    this.thumbnail,
+    this.status,
+    this.price,
+    this.dateCreated,
   });
 
-  factory Food.fromMap(Map data) {
-    return Food(
-      id: data['id'] as int,
-      name: data['name'].toString(),
-      description: data['description'].toString(),
-      price: data['price'] as String,
-      size: data['size'] ?? "M",
-    );
+  FoodItems.fromJson(Map<String, dynamic> json) {
+    itemId = json['itemId'];
+    resturantId = json['resturantId'];
+    resturantName = json['resturantName'];
+    menuId = json['menuId'];
+    itemTitle = json['itemTitle'];
+    shortDescription = json['shortDescription'];
+    thumbnail = json['thumbnailUrl'];
+    status = json['status'];
+    price = json['price'];
+    dateCreated = json['dateCreated'];
   }
 
-  static List<Food> fromJson(List<Map> data) {
-    List<Food> foods = [];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['itemId'] = itemId;
+    data['resturantId'] = resturantId;
+    data['resturantName'] = resturantName;
+    data['menuId'] = menuId;
+    data['itemTitle'] = itemTitle;
+    data['shortDescription'] = shortDescription;
+    data['thumbnailUrl'] = thumbnail;
+    data['status'] = status;
+    data['price'] = price;
+    data['dateCreated'] = dateCreated;
 
-    for (Map i in data) {
-      foods.add(Food.fromMap(i));
-    }
-
-    return foods;
+    return data;
   }
 }

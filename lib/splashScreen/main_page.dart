@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:local_eat/auth/auth_screen.dart';
+import 'package:local_eat/auth/profile.dart';
 import 'package:local_eat/components/app_bar.dart';
+import 'package:local_eat/functions/functions.dart';
+import 'package:local_eat/global.dart';
 import 'package:local_eat/pages/history.dart';
 import 'package:local_eat/pages/homepage.dart';
-import 'package:local_eat/pages/profile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +20,8 @@ class _MainPageState extends State<MainPage> {
   List pages = [
     const HomePage(),
     const HistoryPage(),
-    const ProfilePage(),
+    if (firebaseAuth.currentUser != null) const ProfilePage(),
+    if (firebaseAuth.currentUser == null) const AuthScreen(),
   ];
 
   int currentIndex = 0;
@@ -30,12 +35,18 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    //clearCart(context);
+    //Fluttertoast.showToast(msg: "Orders cleared");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFf1f5ff),
       appBar: homeAppBar(context),
-
       body: pages[currentIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onTap,
@@ -65,7 +76,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      //bottomNavigationBar: const BottomNavBar(),
+      //floatingActionButton: customCartButtom(context),
     );
   }
 }

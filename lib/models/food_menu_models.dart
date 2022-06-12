@@ -1,30 +1,40 @@
-import 'package:local_eat/models/resturant_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FoodMenu {
-  int id;
-  String name, image;
+class Menus {
+  String? menuId, resturantUid, menuTitle, menuInfo, thumbnailUrl, status;
 
-  FoodMenu({
-    required this.id,
-    required this.name,
-    required this.image,
+  Timestamp? dateCreated;
+
+  Menus({
+    this.menuId,
+    this.resturantUid,
+    this.menuTitle,
+    this.menuInfo,
+    this.dateCreated,
+    this.thumbnailUrl,
+    this.status,
   });
 
-  factory FoodMenu.fromMap(Map data) {
-    return FoodMenu(
-      id: data['id'] as int,
-      name: data['name'].toString(),
-      image: data['image'].toString(),
-    );
+  Menus.fromJson(Map<String, dynamic> json) {
+    menuId = json['menuId'];
+    resturantUid = json['resturantUID'];
+    menuTitle = json['menuTitle'];
+    menuInfo = json['menuInfo'];
+    dateCreated = json['dateCreated'];
+    thumbnailUrl = json['thumbnailUrl'];
+    status = json['status'];
   }
 
-  static List<FoodMenu> fromJson(List<Map> data) {
-    List<FoodMenu> foodMenu = [];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['menuId'] = menuId;
+    data['resturantUID'] = resturantUid;
+    data['menuTitle'] = menuTitle;
+    data['menuInfo'] = menuInfo;
+    data['dateCreated'] = dateCreated;
+    data['thumbnailUrl'] = thumbnailUrl;
+    data['status'] = status;
 
-    for (Map i in data) {
-      foodMenu.add(FoodMenu.fromMap(i));
-    }
-
-    return foodMenu;
+    return data;
   }
 }
