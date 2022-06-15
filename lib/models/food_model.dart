@@ -39,7 +39,7 @@ class FoodItems {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['itemId'] = itemId;
     data['resturantId'] = resturantId;
     data['resturantName'] = resturantName;

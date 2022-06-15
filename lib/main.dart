@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_eat/functions/address_changer.dart';
 import 'package:local_eat/functions/cart_item_counter.dart';
 import 'package:local_eat/functions/total_order_amount.dart';
 import 'package:local_eat/global.dart';
@@ -25,11 +26,15 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (c) => CartItemCounter()),
         ChangeNotifierProvider(create: (c) => TotalOrderAmount()),
+        ChangeNotifierProvider(create: (c) => AddressChanger()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Local Eat',
-        theme: ThemeData(primarySwatch: Colors.yellow),
+        theme: ThemeData(
+          primarySwatch: Colors.yellow,
+          backgroundColor: const Color(0xFFf1f5ff),
+        ),
         home: const MainPage(),
       ),
     );

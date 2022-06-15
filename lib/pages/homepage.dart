@@ -202,6 +202,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           // returant list
+
           StreamBuilder<QuerySnapshot>(
             stream:
                 FirebaseFirestore.instance.collection("resturants").snapshots(),

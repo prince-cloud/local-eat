@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TotalOrderAmount extends ChangeNotifier {
   double _totalAmount = 0;

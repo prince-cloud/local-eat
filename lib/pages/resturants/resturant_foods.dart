@@ -52,7 +52,7 @@ class _ResturantMenuFoodsState extends State<ResturantMenuFoods> {
                   Container(
                     height: 140,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage("widget.menu.image"),
                         fit: BoxFit.cover,
@@ -80,10 +80,10 @@ class _ResturantMenuFoodsState extends State<ResturantMenuFoods> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
+                      children: const [
                         Text(
                           "widget.menu.name",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 27,
                             fontWeight: FontWeight.bold,
                             color: Colors.black54,

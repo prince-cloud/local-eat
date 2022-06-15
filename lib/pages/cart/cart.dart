@@ -5,11 +5,13 @@ import 'package:local_eat/functions/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:local_eat/functions/total_order_amount.dart';
 import 'package:local_eat/models/food_model.dart';
-import 'package:local_eat/pages/resturants/cart_item.dart';
+import 'package:local_eat/pages/address/address_page.dart';
+import 'package:local_eat/pages/cart/cart_item.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+  final String? resturantUid;
+  const CartPage({Key? key, this.resturantUid}) : super(key: key);
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -42,8 +44,7 @@ class _CartPageState extends State<CartPage> {
           },
           color: Colors.black,
         ),
-        title:
-            const Text("My Order", style: const TextStyle(color: Colors.black)),
+        title: const Text("My Order", style: TextStyle(color: Colors.black)),
       ),
       body: CustomScrollView(
         slivers: [
@@ -68,7 +69,7 @@ class _CartPageState extends State<CartPage> {
                         child: circularProgress(),
                       ),
                     )
-                  : snapShot.data!.docs.length == 0
+                  : snapShot.data!.docs.isEmpty
                       ? SliverToBoxAdapter(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +154,7 @@ class _CartPageState extends State<CartPage> {
           alignment: Alignment.bottomLeft,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.orange,
+              primary: Colors.black,
               padding: const EdgeInsets.symmetric(
                 horizontal: 50,
                 vertical: 10,
@@ -175,17 +176,25 @@ class _CartPageState extends State<CartPage> {
           alignment: Alignment.bottomRight,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: const Color.fromARGB(255, 0, 0, 0),
+              primary: Colors.orange,
               padding: const EdgeInsets.symmetric(
                 horizontal: 50,
                 vertical: 10,
               ),
             ),
             onPressed: () {
-              //formValidation();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdressPage(
+                    totAlamount: totalAmount.toDouble(),
+                    resturantUid: widget.resturantUid!,
+                  ),
+                ),
+              );
             },
             child: const Text(
-              "Complete",
+              "Next",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

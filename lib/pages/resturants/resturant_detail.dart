@@ -11,7 +11,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:local_eat/splashScreen/main_page.dart';
-import 'package:local_eat/splashScreen/splash_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ResturantDetail extends StatefulWidget {
@@ -26,7 +25,8 @@ class _ResturantDetailState extends State<ResturantDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: customCartButtom(context),
+      floatingActionButton:
+          customCartButtom(context, widget.resturant.resturantUID!),
       backgroundColor: const Color(0xFFf1f5ff),
       appBar: AppBar(
         backgroundColor: const Color(0xFFfcc833),

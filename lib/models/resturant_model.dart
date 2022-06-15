@@ -9,11 +9,11 @@ class Resturants {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data["resturantUID"] = this.resturantUID;
-    data["resturantName"] = this.resturantName;
-    data["resturantAvatarUrl"] = this.resturantAvatarUrl;
-    data["resturantEmail"] = this.resturantEmail;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["resturantUID"] = resturantUID;
+    data["resturantName"] = resturantName;
+    data["resturantAvatarUrl"] = resturantAvatarUrl;
+    data["resturantEmail"] = resturantEmail;
 
     return data;
   }

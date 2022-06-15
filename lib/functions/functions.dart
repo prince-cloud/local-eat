@@ -68,17 +68,19 @@ clearCart(context) {
   FirebaseFirestore.instance
       .collection("users")
       .doc(firebaseAuth.currentUser!.uid)
-      .update({"userCart": emptyList}).then((value) {
-    sharedPreferences!.setStringList("userCart", emptyList!);
-    Provider.of<CartItemCounter>(context, listen: false)
-        .displayCartItemCounter();
+      .update({"userCart": emptyList}).then(
+    (value) {
+      sharedPreferences!.setStringList("userCart", emptyList!);
+      Provider.of<CartItemCounter>(context, listen: false)
+          .displayCartItemCounter();
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const MainPage(),
-      ),
-    );
-    /* Fluttertoast.showToast(msg: "Orders cleared"); */
-  });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MainPage(),
+        ),
+      );
+      /* Fluttertoast.showToast(msg: "Orders cleared"); */
+    },
+  );
 }

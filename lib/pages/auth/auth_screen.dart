@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:local_eat/auth/login.dart';
-import 'package:local_eat/auth/signup.dart';
+import 'package:local_eat/pages/auth/login.dart';
+import 'package:local_eat/pages/auth/signup.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

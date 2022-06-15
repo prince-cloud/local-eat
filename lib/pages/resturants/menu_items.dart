@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:local_eat/components/cart_button.dart';
 import 'package:local_eat/components/progress_bar.dart';
-import 'package:local_eat/functions/cart_item_counter.dart';
 import 'package:local_eat/functions/functions.dart';
 import 'package:local_eat/models/food_menu_models.dart';
 import 'package:local_eat/models/food_model.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
 
 class MenuItems extends StatefulWidget {
   final Menus model;
@@ -29,7 +27,8 @@ class _MenuItemsState extends State<MenuItems> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      floatingActionButton: customCartButtom(context),
+      floatingActionButton:
+          customCartButtom(context, widget.model.resturantUid!),
       backgroundColor: const Color(0xFFf1f5ff),
       appBar: AppBar(
         backgroundColor: const Color(0xFFfcc833),
@@ -198,7 +197,7 @@ class _MenuItemsState extends State<MenuItems> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      children: [],
+                                      children: const [],
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(right: 16),

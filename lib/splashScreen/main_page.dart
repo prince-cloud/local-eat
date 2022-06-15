@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:local_eat/auth/auth_screen.dart';
-import 'package:local_eat/auth/profile.dart';
 import 'package:local_eat/components/app_bar.dart';
-import 'package:local_eat/functions/functions.dart';
 import 'package:local_eat/global.dart';
+import 'package:local_eat/pages/auth/auth_screen.dart';
+import 'package:local_eat/pages/auth/profile.dart';
 import 'package:local_eat/pages/history.dart';
 import 'package:local_eat/pages/homepage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -46,7 +45,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFf1f5ff),
       appBar: homeAppBar(context),
-      body: pages[currentIndex],
+      body: DoubleBackToCloseApp(
+        snackBar: const SnackBar(
+          content: Text('Tap again to close app'),
+        ),
+        child: pages[currentIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: onTap,
