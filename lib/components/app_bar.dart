@@ -9,7 +9,7 @@ AppBar homeAppBar(BuildContext context) {
     leading: IconButton(
       icon: const Icon(Icons.menu),
       onPressed: () {},
-      color: Colors.white,
+      color: primaryColor,
     ),
     title: RichText(
       text: const TextSpan(
@@ -20,20 +20,28 @@ AppBar homeAppBar(BuildContext context) {
         children: [
           TextSpan(
             text: "Local",
-            style: TextStyle(color: blackColor, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: blackColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
           TextSpan(
             text: " Eat",
-            style: TextStyle(color: whiteColor, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: whiteColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
         ],
       ),
     ),
-    actions: <Widget>[
+    /* actions: <Widget>[
       IconButton(
         icon: SvgPicture.asset("assets/icons/notification.svg"),
         onPressed: () {},
       ),
-    ],
+    ], */
   );
 }

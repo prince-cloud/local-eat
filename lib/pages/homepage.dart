@@ -230,7 +230,7 @@ class HomePage extends StatelessWidget {
           ),
 
           // popular foods
-          const SliverToBoxAdapter(
+          /* const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(15),
               child: Text(
@@ -241,7 +241,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ), */
         ],
       ),
     );

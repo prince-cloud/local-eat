@@ -7,7 +7,7 @@ class FoodItems {
       menuId,
       itemTitle,
       shortDescription,
-      thumbnail,
+      //thumbnail,
       status;
   int? price;
   Timestamp? dateCreated;
@@ -19,7 +19,7 @@ class FoodItems {
     this.menuId,
     this.itemTitle,
     this.shortDescription,
-    this.thumbnail,
+    //this.thumbnail,
     this.status,
     this.price,
     this.dateCreated,
@@ -32,7 +32,7 @@ class FoodItems {
     menuId = json['menuId'];
     itemTitle = json['itemTitle'];
     shortDescription = json['shortDescription'];
-    thumbnail = json['thumbnailUrl'];
+    //thumbnail = json['thumbnailUrl'];
     status = json['status'];
     price = json['price'];
     dateCreated = json['dateCreated'];
@@ -46,7 +46,7 @@ class FoodItems {
     data['menuId'] = menuId;
     data['itemTitle'] = itemTitle;
     data['shortDescription'] = shortDescription;
-    data['thumbnailUrl'] = thumbnail;
+    //data['thumbnailUrl'] = thumbnail;
     data['status'] = status;
     data['price'] = price;
     data['dateCreated'] = dateCreated;

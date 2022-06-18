@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_eat/components/progress_bar.dart';
 import 'package:local_eat/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:local_eat/models/resturant_model.dart';
@@ -39,12 +38,12 @@ class _ResturantsListState extends State<ResturantsList> {
               ],
             ),
           ),
-          actions: <Widget>[
+          /* actions: <Widget>[
             IconButton(
               icon: SvgPicture.asset("assets/icons/notification.svg"),
               onPressed: () {},
             ),
-          ],
+          ], */
         ),
         body: CustomScrollView(
           slivers: [

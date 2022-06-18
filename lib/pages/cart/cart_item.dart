@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:local_eat/global.dart';
 import 'package:local_eat/models/food_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: must_be_immutable
 class Cartitem extends StatelessWidget {
   final FoodItems? model;
   BuildContext? context;
   final int? quantityNumber;
-  //int? totalprice = 0;
+  final String? itemId;
 
   Cartitem({
     Key? key,
     this.model,
     this.context,
     this.quantityNumber,
+    this.itemId,
   }) : super(key: key);
+
+  /* deleteOrderItem() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(sharedPreferences!.getString("uid"))
+        .collection("userCart")
+        .getData()
+        .doc("productIds")
+        .where("itemId", whereIn: separateItemIds())
+        .delete()
+        .then((value) {
+      Fluttertoast.showToast(msg: "Address succesfful deleted");
+    });
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +39,6 @@ class Cartitem extends StatelessWidget {
         shadowColor: const Color.fromARGB(110, 0, 0, 0),
         child: InkWell(
           child: ListTile(
-            /* leading: Image(
-              width: 80,
-              height: 200,
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                model!.thumbnail.toString(),
-              ),
-            ), */
-
             title: Text(
               model!.itemTitle.toString(),
               style: const TextStyle(
@@ -46,6 +49,8 @@ class Cartitem extends StatelessWidget {
               "x " + quantityNumber.toString(),
             ),
             trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "GHC " + (model!.price! * quantityNumber!).toString(),
@@ -54,30 +59,16 @@ class Cartitem extends StatelessWidget {
                     color: Colors.orange,
                   ),
                 ),
-                IconButton(
+                /* IconButton(
                   onPressed: () {
-                    FirebaseFirestore.instance
-                        .collection("users")
-                        .doc(sharedPreferences!.getString("uid"))
-                        .collection("userCart")
-                        .doc(model!.itemId)
-                        .delete()
-                        .whenComplete(
-                      () {
-                        Fluttertoast.showToast(
-                          msg: "Item succesffully deleted",
-                        );
-                      },
-                    );
-
-                    /* Fluttertoast.showToast(msg: "Orders cleared"); */
+                    deleteOrderItem();
                   },
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.red,
                     size: 14,
                   ),
-                ),
+                ), */
               ],
             ),
           ),

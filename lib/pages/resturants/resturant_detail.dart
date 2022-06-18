@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_eat/components/cart_button.dart';
+import 'package:local_eat/components/maps.dart';
 import 'package:local_eat/components/progress_bar.dart';
 import 'package:local_eat/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -55,12 +56,12 @@ class _ResturantDetailState extends State<ResturantDetail> {
             ],
           ),
         ),
-        actions: <Widget>[
+        /*  actions: <Widget>[
           IconButton(
             icon: SvgPicture.asset("assets/icons/notification.svg"),
             onPressed: () {},
           ),
-        ],
+        ], */
       ),
       body: DoubleBackToCloseApp(
         snackBar: const SnackBar(
@@ -91,12 +92,12 @@ class _ResturantDetailState extends State<ResturantDetail> {
                   Container(
                     alignment: Alignment.topCenter,
                     padding: const EdgeInsets.only(
-                      top: 120,
+                      top: 90,
                       right: 20.0,
                       left: 20.0,
                     ),
                     child: SizedBox(
-                      height: 120,
+                      height: 160,
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         color: Colors.white,
@@ -112,6 +113,53 @@ class _ResturantDetailState extends State<ResturantDetail> {
                                 fontSize: 27,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black54,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 20, left: 20, top: 3, bottom: 3),
+                              child: Container(
+                                color: const Color(0xFFEBEBEB),
+                                height: 1.0,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      MapsUtils.openMapWithPosition(
+                                        widget.resturant.locLat!,
+                                        widget.resturant.locLong!,
+                                      );
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: const [
+                                        Icon(
+                                          Icons.person_pin_circle,
+                                          size: 16,
+                                        ),
+                                        Text(
+                                          "View on Map",
+                                          style: TextStyle(
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.resturant.resturantLocation
+                                        .toString(),
+                                  ),
+                                ],
                               ),
                             ),
                             Padding(
@@ -226,134 +274,3 @@ class _ResturantDetailState extends State<ResturantDetail> {
     );
   }
 }
-
-/* 
- ListView(
-        children: [
-          Stack(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: 170,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            widget.resturant.resturantAvatarUrl.toString()),
-                        fit: BoxFit.cover,
-                        opacity: 0.4,
-                      ),
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                alignment: Alignment.topCenter,
-                padding: const EdgeInsets.only(
-                  top: 120,
-                  right: 20.0,
-                  left: 20.0,
-                ),
-                child: SizedBox(
-                  height: 120,
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    color: Colors.white,
-                    elevation: 7,
-                    shadowColor: const Color.fromARGB(110, 0, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          widget.resturant.resturantName.toString(),
-                          style: const TextStyle(
-                            fontSize: 27,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              right: 20, left: 20, top: 3, bottom: 3),
-                          child: Container(
-                            color: const Color(0xFFEBEBEB),
-                            height: 1.0,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: const [
-                                Icon(
-                                  Icons.timelapse,
-                                  color: Colors.black54,
-                                ),
-                                Text("30-40")
-                              ],
-                            ),
-                            Column(),
-                            Column(
-                              children: const [
-                                Icon(
-                                  Icons.motorcycle,
-                                  color: Colors.black54,
-                                ),
-                                Text("Ghc 5")
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          
-          
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("resturants")
-                .doc(
-                  sharedPreferences!.getString("uid"),
-                )
-                .collection("menus")
-                .orderBy("dateCreated", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 1,
-                      staggeredTileBuilder: (context) =>
-                          const StaggeredTile.fit(1),
-                      itemBuilder: (context, index) {
-                        Menus model = Menus.fromJson(
-                          snapshot.data!.docs[index].data()!
-                              as Map<String, dynamic>,
-                        );
-                        return resturantMenuCard(
-                          context: context,
-                          /*model: model, */
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    );
-            },
-          ),
-        ],
-      ),
-    
- */

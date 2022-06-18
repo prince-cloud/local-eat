@@ -25,9 +25,19 @@ class _AddNewAddressState extends State<AddNewAddress> {
   final formKey = GlobalKey<FormState>();
   List<Placemark>? placemarks;
 
+  bool isLoading = false;
+
   Position? position;
 
   getUserCurrentLocation() async {
+    /*  showDialog(
+      context: context,
+      builder: (c) {
+        return const LoadingDialog(
+          message: "getting current location",
+        );
+      },
+    ); */
     Position newPosition = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
@@ -53,6 +63,10 @@ class _AddNewAddressState extends State<AddNewAddress> {
         '${pMark.subAdministrativeArea} ${pMark.administrativeArea}, ${pMark.postalCode}';
     _state.text = '${pMark.country}';
     _completeAddress.text = fullAddress;
+
+    setState(() {
+      isLoading == false;
+    });
   }
 
   @override
@@ -79,7 +93,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
       ),
       body: ListView(
         children: [
-          ListTile(
+          /* ListTile(
             leading: const Icon(
               Icons.person_pin_circle,
               size: 40,
@@ -97,6 +111,31 @@ class _AddNewAddressState extends State<AddNewAddress> {
             },
             icon: const Icon(Icons.my_location),
             label: const Text("Get current location"),
+          ), */
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Column(
+              children: const [
+                /* Text(
+                  "New Address",
+                  style: TextStyle(
+                    color: blackColor,
+                    fontSize: 35,
+                  ),
+                ), */
+                Text(
+                  "Your current location will be used for other fields",
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 30,
           ),
           Form(
             key: formKey,
@@ -109,22 +148,27 @@ class _AddNewAddressState extends State<AddNewAddress> {
                 CustomAddressTextField(
                   controller: _phoneNumber,
                   label: "Phone Number",
+                  keyboardType: TextInputType.number,
                 ),
                 CustomAddressTextField(
                   controller: _city,
                   label: "City",
+                  enabled: false,
                 ),
                 CustomAddressTextField(
                   controller: _state,
                   label: "Stae/Country",
+                  enabled: false,
                 ),
                 CustomAddressTextField(
                   controller: _flatNumber,
                   label: "Address Line",
+                  enabled: false,
                 ),
                 CustomAddressTextField(
                   controller: _completeAddress,
                   label: "Complete Address",
+                  enabled: false,
                 ),
               ],
             ),

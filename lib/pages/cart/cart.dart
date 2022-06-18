@@ -117,6 +117,7 @@ class _CartPageState extends State<CartPage> {
                               }
 
                               return Cartitem(
+                                itemId: model.itemId,
                                 model: model,
                                 context: context,
                                 quantityNumber:

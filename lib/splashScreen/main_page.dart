@@ -3,10 +3,10 @@ import 'package:local_eat/components/app_bar.dart';
 import 'package:local_eat/global.dart';
 import 'package:local_eat/pages/auth/auth_screen.dart';
 import 'package:local_eat/pages/auth/profile.dart';
-import 'package:local_eat/pages/history.dart';
 import 'package:local_eat/pages/homepage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:local_eat/pages/orders/my_orders.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     const HomePage(),
-    const HistoryPage(),
+    const MyOrders(),
     if (firebaseAuth.currentUser != null) const ProfilePage(),
     if (firebaseAuth.currentUser == null) const AuthScreen(),
   ];
@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> {
         type: BottomNavigationBarType.fixed,
         elevation: 8,
         showSelectedLabels: true,
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
         selectedLabelStyle: const TextStyle(
           color: Colors.black54,
           fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class _MainPageState extends State<MainPage> {
             icon: SvgPicture.asset("assets/icons/home2.svg"),
           ),
           BottomNavigationBarItem(
-            label: "History",
+            label: "Orders",
             icon: SvgPicture.asset("assets/icons/Glyph.svg"),
           ),
           BottomNavigationBarItem(

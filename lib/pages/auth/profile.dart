@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:local_eat/constants.dart';
 import 'package:local_eat/global.dart';
+import 'package:local_eat/pages/address/add_new_address.dart';
+import 'package:local_eat/pages/orders/history.dart';
 import 'package:local_eat/splashScreen/main_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -69,14 +71,28 @@ class _ProfilePageState extends State<ProfilePage> {
             title: const Text(
               "History",
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OrderHistory(),
+                ),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.add_location),
             title: const Text(
               "New Address",
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddNewAddress(),
+                ),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.lock),

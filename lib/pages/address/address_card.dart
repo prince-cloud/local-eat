@@ -5,7 +5,6 @@ import 'package:local_eat/functions/address_changer.dart';
 import 'package:local_eat/functions/functions.dart';
 import 'package:local_eat/global.dart';
 import 'package:local_eat/models/address_model.dart';
-import 'package:local_eat/pages/cart/placed_order.dart';
 import 'package:local_eat/splashScreen/main_page.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,10 +40,10 @@ class _AddressCardState extends State<AddressCard> {
       "totalAmount": widget.totalAmount,
       "orderBy": sharedPreferences!.getString("uid"),
       "productIds": sharedPreferences!.getStringList("userCart"),
-      "orderTime": DateTime.now().toString(),
+      "orderTime": orderId,
       "paymentOption": "Cash on Delivery",
       "resturantUid": widget.resturantUid,
-      "orderSucess": "Yes",
+      "isSuccess": true,
       "riderUid": "",
       "status": "normal",
     });
@@ -54,10 +53,10 @@ class _AddressCardState extends State<AddressCard> {
       "totalAmount": widget.totalAmount,
       "orderBy": sharedPreferences!.getString("uid"),
       "productIds": sharedPreferences!.getStringList("userCart") ?? "",
-      "orderTime": DateTime.now().toString(),
+      "orderTime": orderId,
       "paymentOption": "Cash on Delivery",
       "resturantUid": widget.resturantUid,
-      "orderSucess": "Yes",
+      "isSuccess": true,
       "riderUid": "",
       "status": "normal",
     }).whenComplete(() {
@@ -89,6 +88,18 @@ class _AddressCardState extends State<AddressCard> {
         .collection("orders")
         .doc(orderId)
         .set(data);
+  }
+
+  deleteAddress() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(sharedPreferences!.getString("uid"))
+        .collection("userAddress")
+        .doc(widget.addressId)
+        .delete()
+        .then((value) {
+      Fluttertoast.showToast(msg: "Address succesfful deleted");
+    });
   }
 
   @override
@@ -162,14 +173,16 @@ class _AddressCardState extends State<AddressCard> {
                 ),
                 Column(
                   children: [
-                    IconButton(
+                    /* IconButton(
                       onPressed: () {},
                       icon: const Icon(
                         Icons.edit,
                       ),
-                    ),
+                    ), */
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        deleteAddress();
+                      },
                       icon: const Icon(
                         Icons.delete,
                         color: Colors.red,

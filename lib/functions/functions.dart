@@ -6,6 +6,23 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:local_eat/splashScreen/main_page.dart';
 import 'package:provider/provider.dart';
 
+separateOrdersItemIds(orderIds) {
+  List<String> separateItemIdsList = [], defaultItemList = [];
+  int i = 0;
+
+  defaultItemList = List<String>.from(orderIds);
+
+  for (i; i < defaultItemList.length; i++) {
+    String item = defaultItemList[i].toString();
+    var position = item.lastIndexOf(":");
+    String getItemId = (position != -1) ? item.substring(0, position) : item;
+
+    separateItemIdsList.add(getItemId);
+  }
+
+  return separateItemIdsList;
+}
+
 separateItemIds() {
   List<String> separateItemIdsList = [], defaultItemList = [];
   int i = 0;
@@ -56,6 +73,23 @@ separateItemQuantity() {
     List<String> listItemCharacters = item.split(":").toList();
     var quantityNumber = int.parse(listItemCharacters[1].toString());
     separeteitemQuantityList.add(quantityNumber);
+  }
+
+  return separeteitemQuantityList;
+}
+
+separateOrderItemQuantity(orderIds) {
+  List<String> separeteitemQuantityList = [];
+  List<String> defaultItemList = [];
+  int i = 1;
+
+  defaultItemList = List<String>.from(orderIds);
+
+  for (i; i < defaultItemList.length; i++) {
+    String item = defaultItemList[i].toString();
+    List<String> listItemCharacters = item.split(":").toList();
+    var quantityNumber = int.parse(listItemCharacters[1].toString());
+    separeteitemQuantityList.add(quantityNumber.toString());
   }
 
   return separeteitemQuantityList;

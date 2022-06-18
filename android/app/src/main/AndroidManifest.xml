@@ -6,7 +6,7 @@
         <!-- internet permissions -->
         <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="local_eat"
+        android:label="Local Eat"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

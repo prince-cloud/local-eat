@@ -16,7 +16,7 @@ Widget customCartButtom(
         ),
       );
     },
-    tooltip: 'Increment',
+    tooltip: 'Cart',
     child: Stack(
       children: [
         const Icon(
