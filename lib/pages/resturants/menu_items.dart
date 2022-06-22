@@ -4,8 +4,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:local_eat/components/cart_button.dart';
 import 'package:local_eat/components/progress_bar.dart';
 import 'package:local_eat/functions/functions.dart';
+import 'package:local_eat/global.dart';
 import 'package:local_eat/models/food_menu_models.dart';
 import 'package:local_eat/models/food_model.dart';
+import 'package:local_eat/pages/auth/auth_screen.dart';
+import 'package:local_eat/pages/auth/login.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -27,8 +30,9 @@ class _MenuItemsState extends State<MenuItems> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      floatingActionButton:
-          customCartButtom(context, widget.model.resturantUid!),
+      
+            floatingActionButton: firebaseAuth.currentUser != null ?
+          customCartButtom(context, widget.model.resturantUid!) : Container(),
       backgroundColor: const Color(0xFFf1f5ff),
       appBar: AppBar(
         backgroundColor: const Color(0xFFfcc833),
@@ -96,84 +100,98 @@ class _MenuItemsState extends State<MenuItems> {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          showDialog(
-                                            context:
-                                                _scaffoldKey.currentContext!,
-                                            //context: context,
-                                            builder: (currentContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  "Order - " +
-                                                      model.itemTitle
-                                                          .toString(),
-                                                  style: const TextStyle(
-                                                      fontSize: 14),
-                                                ),
-                                                content:
-                                                    NumberInputWithIncrementDecrement(
-                                                  controller:
-                                                      quantityController,
-                                                  min: 1,
-                                                  initialValue: 1,
-                                                ),
-                                                actions: [
-                                                  Center(
-                                                    child: ElevatedButton(
-                                                      onPressed: () {
-                                                        int itemQuantity =
-                                                            int.parse(
-                                                                quantityController
-                                                                    .text);
-                                                        // check if item already exits
-                                                        List<String>
-                                                            separateItemIdsList =
-                                                            separateItemIds();
+                                          if (firebaseAuth.currentUser ==
+                                              null) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    "Log In or Sign Up to place an order");
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const AuthScreen(),
+                                              ),
+                                            );
+                                          } else {
+                                            showDialog(
+                                              context:
+                                                  _scaffoldKey.currentContext!,
+                                              //context: context,
+                                              builder: (currentContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                    "Order - " +
+                                                        model.itemTitle
+                                                            .toString(),
+                                                    style: const TextStyle(
+                                                        fontSize: 14),
+                                                  ),
+                                                  content:
+                                                      NumberInputWithIncrementDecrement(
+                                                    controller:
+                                                        quantityController,
+                                                    min: 1,
+                                                    initialValue: 1,
+                                                  ),
+                                                  actions: [
+                                                    Center(
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          int itemQuantity =
+                                                              int.parse(
+                                                                  quantityController
+                                                                      .text);
+                                                          // check if item already exits
+                                                          List<String>
+                                                              separateItemIdsList =
+                                                              separateItemIds();
 
-                                                        separateItemIdsList
-                                                                .contains(model
-                                                                    .itemId)
-                                                            ? Fluttertoast
-                                                                .showToast(
-                                                                msg:
-                                                                    "Item already added.",
-                                                              )
-                                                            :
-                                                            // add to cart function
-                                                            addItemToCart(
-                                                                model.itemId,
-                                                                itemQuantity,
-                                                                context,
-                                                              );
-                                                        Navigator.of(
-                                                                currentContext)
-                                                            .pop();
-                                                      },
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        primary: const Color
-                                                                .fromARGB(
-                                                            255, 0, 0, 0),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          horizontal: 100,
-                                                          //vertical: 10,
+                                                          separateItemIdsList
+                                                                  .contains(model
+                                                                      .itemId)
+                                                              ? Fluttertoast
+                                                                  .showToast(
+                                                                  msg:
+                                                                      "Item already added.",
+                                                                )
+                                                              :
+                                                              // add to cart function
+                                                              addItemToCart(
+                                                                  model.itemId,
+                                                                  itemQuantity,
+                                                                  context,
+                                                                );
+                                                          Navigator.of(
+                                                                  currentContext)
+                                                              .pop();
+                                                        },
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          primary: const Color
+                                                                  .fromARGB(
+                                                              255, 0, 0, 0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                            horizontal: 100,
+                                                            //vertical: 10,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      child: const Text(
-                                                        "Order",
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                                        child: const Text(
+                                                          "Order",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
                                         },
                                         icon: const Icon(
                                           Icons.add_circle,

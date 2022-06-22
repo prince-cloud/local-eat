@@ -128,7 +128,12 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.arrow_back, color: primaryColor,),
+        backgroundColor: primaryColor,
+      ),
       body: ListView(children: [
         const SizedBox(
           height: 15,
@@ -136,7 +141,7 @@ class _LogInState extends State<LogIn> {
         Center(
           child: Image.asset(
             'assets/images/login.png',
-            height: 250,
+            height: 170,
           ),
         ),
         const SizedBox(
