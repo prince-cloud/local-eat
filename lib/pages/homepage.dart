@@ -11,6 +11,7 @@ import 'package:local_eat/pages/resturants/resturant_card.dart';
 import 'package:local_eat/pages/resturants/resturant_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,6 +69,7 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   IconButton(
                                     onPressed: () {
+                                    
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -90,6 +92,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                   IconButton(
                                     onPressed: () {
+                                     
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -112,12 +115,13 @@ class HomePage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
+                       Fluttertoast.showToast(msg: "Ops!, Sorry, Currently not Available Now");
+                     /*  Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const GroceryShopList(),
                         ),
-                      );
+                      ); */
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -141,13 +145,14 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   IconButton(
                                     onPressed: () {
-                                      Navigator.push(
+                                       Fluttertoast.showToast(msg: "Ops!, Sorry, Currently not Available Now");
+                                      /* Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const GrocerisList(),
                                         ),
-                                      );
+                                      ); */
                                     },
                                     icon: SvgPicture.asset(
                                       "assets/icons/vegetables.svg",
@@ -163,13 +168,14 @@ class HomePage extends StatelessWidget {
                                   ),
                                   IconButton(
                                     onPressed: () {
-                                      Navigator.push(
+                                       Fluttertoast.showToast(msg: "Ops!, Sorry, Currently not Available Now");
+                                      /* Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const GroceryShopList(),
                                         ),
-                                      );
+                                      ); */
                                     },
                                     icon: SvgPicture.asset(
                                       "assets/icons/right_arrow.svg",

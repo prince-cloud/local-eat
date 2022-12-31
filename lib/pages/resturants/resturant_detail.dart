@@ -3,8 +3,8 @@ import 'package:local_eat/components/cart_button.dart';
 import 'package:local_eat/components/maps.dart';
 import 'package:local_eat/components/progress_bar.dart';
 import 'package:local_eat/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_eat/functions/functions.dart';
+import 'package:local_eat/global.dart';
 import 'package:local_eat/models/food_menu_models.dart';
 import 'package:local_eat/models/resturant_model.dart';
 import 'package:local_eat/pages/resturants/menu_card.dart';
@@ -26,8 +26,10 @@ class _ResturantDetailState extends State<ResturantDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          customCartButtom(context, widget.resturant.resturantUID!),
+      floatingActionButton: firebaseAuth.currentUser != null ?
+          customCartButtom(context, widget.resturant.resturantUID!) : Container(),
+
+
       backgroundColor: const Color(0xFFf1f5ff),
       appBar: AppBar(
         backgroundColor: const Color(0xFFfcc833),
@@ -35,14 +37,20 @@ class _ResturantDetailState extends State<ResturantDetail> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () {
-            clearCart(context);
-            Navigator.push(
+            if (firebaseAuth.currentUser == null){
+              Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const MainPage(),
               ),
             );
+            } else {
+              clearCart(context);
+           
             Fluttertoast.showToast(msg: "Orders cleared");
+              
+            }
+            
           },
           color: Colors.white,
         ),
@@ -80,7 +88,7 @@ class _ResturantDetailState extends State<ResturantDetail> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
-                                widget.resturant.resturantAvatarUrl.toString()),
+                                widget.resturant.resturantAvatarUrl.toString(),),
                             fit: BoxFit.cover,
                             opacity: 0.4,
                           ),
